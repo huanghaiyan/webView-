@@ -26,7 +26,7 @@
     webView.scalesPageToFit = YES;//自动对页面进行缩放以适应屏幕
     [webView setUserInteractionEnabled:YES];//是否支持交互
     //加载网络资源
-    NSURL *url = [NSURL URLWithString:@"http://www.hcios.com"];//创建url（统一资源定位符，互联网标准资源的地址）
+    NSURL *url = [NSURL URLWithString:@"http://news.163.com/16/0525/09/BNTC1B7O00014PRF.html"];//创建url（统一资源定位符，互联网标准资源的地址）
     NSURLRequest *urlRequest = [[NSURLRequest alloc]initWithURL:url];//创建NSURLRequest
     [webView loadRequest:urlRequest];//加载
     /*
@@ -92,6 +92,15 @@
 //当WebView完成加载一个请求之后，得到通知
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
+    //获取网页title
+    NSString *titleHtmlInfo = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    NSLog(@"titleHtmlInfo------------:%@",titleHtmlInfo);
+    //获取到得网页内容
+    
+    NSString *allHtmlInfo = [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerHTML"];
+    
+    NSLog(@"allHtmlInfo****************%@",allHtmlInfo);
+    
     NSLog(@"finish");
 }
 //当WebView在请求加载中发生错误时，得到通知。提供一个NSSError对象，以标识所发生错误类型。
